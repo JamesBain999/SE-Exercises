@@ -51,12 +51,12 @@
         }
 
 
-      /* III. Position */
+      /* III. Position 
+      In summary, the key distinction lies in whether the absolute quality is considered in relation to something else (absolute within relative) or exists independently, unaffected by any particular context (absolute outside of relative)*/
         .position-absolute {
             position: absolute;
-            left: 500px;
-            right: 500px;
-            z-index: 0;
+            left: 50%;
+            z-index: -1;
         }
 
         .position-relative {
@@ -64,8 +64,11 @@
         }
 
         .position-sticky {
-            position: sticky;
-        }
+          position: sticky;
+          top: 0;
+          background-color: green;
+          border: 2px solid #4CAF50;
+          }
 
       /* IV. Styling text */
         .text-style {
