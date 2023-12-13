@@ -1,0 +1,84 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header {
+    line-height: 5px;
+    position: relative;
+    padding: 10px 10px 10px 15px;
+    background-color: rgb(4, 170, 109);
+    color: white;
+    border-radius: 5px;
+}
+
+#headerh2 {
+    font-size: 16px;
+}
+
+li {
+    font-weight: 400;
+    position: relative;
+    margin: 4px;
+    padding: 2px;
+    right: 40px;
+    line-height: 26px;
+    border-radius: 5px;
+    background-color: rgb(241, 241, 241) ;
+    width: 186px;
+    list-style: none;
+    border: 1px solid rgb(212, 212, 212);
+}
+
+#centreText {
+    line-height: 1.5em;
+    position: absolute;
+    left: 220px;
+    right: 180px;
+    top: 110px;;
+    width: fit-content;
+    margin-right: 50px;
+}
+
+#sidebar {
+    line-height: 26px;
+    color: white;
+    padding: 20px 10px 165px 10px;
+    background-color: rgb(50, 164, 231);
+    position: absolute;
+    border-radius: 5px;
+    right: 10px;
+    width: 180px;
+    top: 110px;
+}
+
+footer {
+    text-align: center;
+    padding: 0px;
+    font-size: 11.2px;
+    background-color: rgb(241, 241, 241);
+    position: absolute;
+    border-radius: 5px;
+    border-color: rgb(212, 212, 212);
+    top: 565px;
+    left: 0.75px;
+    right: 0.75px;
+    width: auto;
+    }
+
+#underline1 {
+    text-decoration: underline;
+    word-spacing: 3px;
+}
+
+#underline2 {
+    text-decoration: underline;
+    word-spacing: 3px;
+}
+
+#subheading1 {
+    font-size: 32px;
+}
+
+#subheading2 {
+    font-size: 24px;
+}

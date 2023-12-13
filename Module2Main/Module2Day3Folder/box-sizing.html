@@ -1,0 +1,30 @@
+<style>
+    .box {
+        padding: 20px;
+        border: 2px solid black;
+        margin: 40px;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+    }
+
+    .content-box {
+        box-sizing: content-box;
+        background: lightblue;
+    }
+
+    .border-box {
+        box-sizing: border-box;
+        background: lightgreen;
+    }
+</style>
+
+<section class="content-box box">
+    <p>200px x 200px content box</p>
+    <p>Actual width is 244px = 200px + 2px + 2px (border) + 20px + 20px (padding)</p>
+</section>
+
+<section class="border-box box">
+    <p>200px x 200px border box</p>
+    <p>Actual width is 200px (border and padding contribute to total)</p>
+</section>

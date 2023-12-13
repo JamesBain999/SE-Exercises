@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Flexbox Demonstration</title>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: sans-serif; 
+            font-size: 18px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: black; 
+            padding: 1em;
+        }
+
+        #logo {
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%; 
+            background: #B200FF;
+        }
+
+        .menu {
+            display: flex;
+            gap: 25px;
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            color: yellow;
+        }
+
+        main {
+            max-width: 80%; 
+            margin: 1em auto;
+        }
+
+        .box { 
+            border-radius: 1em; 
+            min-width: 300px; 
+            min-height: 300px; 
+            border: 2px solid #404040; 
+            background: #B2B2B2;
+            margin: 1em;
+        }
+
+        #boxes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo"></div>
+        <nav id="main-menu">
+            <ul class="menu">
+                <li>Menu #1</li><li>Menu #2</li><li>Menu #3</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="boxes">
+            <div class="box"></div><div class="box"></div><div class="box"></div>
+        </section>
+    </main>
+</body>
+</html>
