@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="stylesheet.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll a Dice!</title>
+</head>
+<body> 
+<select id="roll">
+    <option value="" disabled selected>Select your option</option>
+    <option id="six" value="6">Six sided dice</option>
+    <option id="seven" value="7">Seven sided dice</option>
+    <option id="eight" value="8">Eight sided dice</option>
+    <option id="nine" value="9">Nine sided dice</option>
+    <option id="ten" value="10">Ten sided dice</option>
+</select>
+<input class="SubmitButton" type="button" value="Submit" onclick="diceValue()">
+<p id="result"></p>
+<script src="script.js"></script>
+</body>
+</html>
