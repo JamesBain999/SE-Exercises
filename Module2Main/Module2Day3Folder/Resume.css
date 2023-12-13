@@ -1,11 +1,14 @@
+/* Global Styles */
 * {
     font-family: Helvetica, Arial sans-serif;
 }
 
+/* Background Color for HTML */
 html {
     background: #0B2545;
 }
 
+/* Header Styles */
 #header {
     line-height: 0px;
     display:flex;
@@ -16,13 +19,8 @@ html {
     border-radius: 10px;
 }
 
-#workExperience p {
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px; 
-}
-
+/* Work Experience and References Paragraph Styles */
+#workExperience p,
 #references p {
     border-top: 1px solid #ccc;
     padding-top: 10px;
@@ -30,14 +28,17 @@ html {
     padding-bottom: 10px; 
 }
 
+/* Main Section Styles */
 main {
     display: flex;
 }
 
+/* Hover Effect for Main Section */
 .hoverMain:hover h2 {
     color: #ff9900;
 }
 
+/* H2 Heading Styles */
 .mainh2 {
     font-weight: 700;
     font-size: 24px;
@@ -48,6 +49,7 @@ main {
     padding-top: 10px;
 }
 
+/* Footer Styles */
 footer {
     position: sticky;
     bottom: 5px;
@@ -56,9 +58,9 @@ footer {
     justify-content: center;
     margin-top: 10px;
     border-radius: 10px;
-
 }
 
+/* About Me Section Styles */
 #aboutMe{
     background: rgb(31, 39, 127);
     color: white;
@@ -73,11 +75,14 @@ footer {
     border-radius: 10px;
 }
 
+/* Portrait Styles */
 #portrait {
     border-radius: 10px;
     margin-top: 10px;
+    border: 5px solid rgb(25, 25, 103);
 }
 
+/* First Column Main Styles */
 #firstColMain {
     display:flex;
     background: #134074;
@@ -85,12 +90,13 @@ footer {
     flex-flow: column;
     text-align: right;
     padding-right: 10px;
+    margin-left: 5px;
     margin-right: 5px;
     width: 15%;
     border-radius: 10px;
-
 }
 
+/* Second Column Main Styles */
 #secondColMain {
     display:flex;
     background: #EEF4ED;
@@ -100,9 +106,9 @@ footer {
     padding-left: 10px;
     width: 60%;
     border-radius: 10px;
-
 }
 
+/* Header Text Styles */
 #headerh1 {
     letter-spacing: 5px;
     font-size: 50px;
@@ -111,30 +117,42 @@ footer {
     color: white;
 }
 
+/* Junior Software Engineer title */
 #headerh2 {
     font-weight: 100;
     font-style: italic;
     color: white;
 }
 
+/* Box Shadow on Elements */
 #firstColMain, #secondColMain, footer {
-    box-shadow: 10px  rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Transition on Anchor Tags */
 #headerh1, #headerh2, footer a {
     transition: color 0.3s ease;
 }
 
+/* Hover Effect on Anchor Tags */
 #headerh1:hover, #headerh2:hover, footer a:hover {
     color: #ff9900;
 }
 
+/* Anchor Tag Styles */
 a {
     color: black;
     text-decoration: none;
     border-bottom: 1px solid #007BFF;
 }
 
+/* Hover Effect on Anchor Tags */
 a:hover {
     border-bottom: 1px solid transparent;
+}
+
+/* Objective Section Styles */
+#objective {
+    line-height: 30px;
+    padding-left: 10px;
 }
