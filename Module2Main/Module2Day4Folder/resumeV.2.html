@@ -11,20 +11,101 @@
 </head>
 <body>
     <header id="mainHeader">
-        <h1 id="pageTitle">James Bain / junior software engineer <button onclick="moveHeader()" id="headerButton">click to learn more</button></h1>
+        <h1 id="pageTitle"><span id="nameTitle">James Bain / junior software engineer</span><button onclick="moveHeader()" id="headerButton">click to learn more</button></h1>
     </header>
-    <div id="content" class="hidden">
-        <main>
-            <div>
-            <h2>About Me</h2>
-            <p>Twenty-five hours had passed since the incident. It seemed to be a lot longer than that. That twenty-five hours seemed more like a week in her mind. The fact that she still was having trouble comprehending exactly what took place wasn't helping the matter. She thought if she could just get a little rest the entire incident might make a little more sense.
-            The bridge spanning a 100-foot gully stood in front of him as the last obstacle blocking him from reaching his destination. While people may have called it a "bridge", the reality was it was nothing more than splintered wooden planks held together by rotting ropes. It was questionable whether it would hold the weight of a child, let alone the weight of a grown man. The problem was there was no other way across the gully, and this played into his calculations of whether or not it was worth the risk of trying to cross it.
-            How had she been so wrong? All her instincts and intuition completely failed her for the first time in her life. She had so heavily relied on both when making decisions up until this moment and she felt a seismic shift take place in her self-confidence. If she could be so completely wrong about something so simple as this, how could she make decisions about really important things taking place in her life? She wasn't sure what she should do next.
+    <div id="hiddenContent" class="hidden">
+    <div id="visibleContent">
+        <nav>
+            <div id="navigationMenu">
+                <img id="navPortrait" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/prince-cartoon-portrait-3-ahmad-nusyirwan.jpg" width="500" height="350"/>
+                <ul id="navList">
+                    <li><a onclick="showSection('aboutMe')">About Me</a></li>
+                    <li><a onclick="showSection('objective')">Objective</a></li>
+                    <li><a onclick="showSection('previousRoles')">Previous Roles</a></li>
+                    <li><a onclick="showSection('skillsAbilities')">Skills & Abilities</a></li>
+                    <li><a onclick="showSection('references')">References</a></li>
+                    <li><a onclick="showSection('contactMe')">Contact Me</a></li>
+                </ul>
             </p>
+            </div>
+        </nav>
+        <main>
+            <div id="mainContent">
+                <div id="aboutMe" class="content">
+                    <h2>About me</h2>
+                    <p>I am James Bain, I was born in Western Australia and grew up in the Wheatbelt in a small town near Toodyay. I moved to Perth to attend secondary school at Guildford Grammar School. It was there that I developed a love for the sciences including human biology, chemistry, and physics. Since leaving school I have pursued many careers, none of which I wholeheartedly grew attached to. I have worked in the mines for a couple of years, worked in the concreting business for a year, washed windows for a semester, and picked produce for Coles over a summer. In these professions, I would often work as part of a small team but would frequently take the initiative to organize the working environment suitably for myself and my team members. I am also comfortable working independently and pride myself in always being extremely safety conscious. However, I now have majorly shifted career paths and settled on support work. I have thoroughly enjoyed my time working in this area and it has given me a great appreciation for helping others.</p>
+                </div>
+                <div id="objective" class="content">
+                    <h2>Objective</h2>
+                    <p>Seeking a challenging and rewarding opportunity with a software engineering firm to use and grow my coding skills. Talented software engineer specializing in graphic user interface seeking to apply my skills at an industry-driving software development company.</p>
+                </div>
+                <div id="previousRoles" class="content">
+                    <h2>Previous Roles</h2>
+                        <p><strong>December 2018 - September 2020</strong> | Team member for Grill’d in Brookfield Place</p>
+                        <p><strong>September 2020 - November 2020</strong> | Precast Concrete Labourer for Humes in Welshpool</p>
+                        <p><strong>November 2020 - November 2021</strong> | Trades Assistant for Bis Industries in Murrin Murrin</p>
+                        <p><strong>November 2021 - April 2022</strong> | Serviceman for BHP at Cliffs underground mine</p>
+                        <p><strong>May 2022 - July 2022</strong> | Picker packer for Taipan Hydraulics in Canningvale</p>
+                        <p><strong>July 2022 - November 2022</strong> | Window Cleaner for Mr. Sparkle window cleaning in Perth</p>
+                        <p><strong>November 2022 - February 2023</strong> | Picker/packer for Costa Logistics in Jandakot</p>
+                        <p><strong>February 2023 – present</strong>  | Disability support worker for MyPlace in Subiaco</p>
+                </div>
+                <div id="skillsAbilities" class="content">
+                    <h2>Skills & Abilities</h2>
+                    <ul>
+                        <li>Manual Handling training Certificate</li>
+                        <li>First Aid training certificate</li>
+                        <li>CPR training certificate</li>
+                        <li>NDIS screening </li>
+                        <li>Hand Hygiene for Clinical Healthcare Workers certificate</li>
+                        <li>National police clearance</li>
+                        <li>Forklift ticket</li>
+                        <li>White card</li>
+                        <li>Certificate II in hospitality</li>
+                        <li>Manual drivers licence</li>
+                    </ul>
+                </div>
+                <div id="references" class="content">
+                    <h2>References</h2>
+                    <p><strong>Simon Newman</strong> – Workshop Leading hand at Murrin Murrin, Bis Industries, 0420 334 332</p>
+                    <p><strong>Brian Young</strong> – Workshop Supervisor at Murrin Murrin, Bis Industries, 0419 905 587</p>
+                    <p><strong>Daniel Morgan</strong> – Workshop Supervisor at Cliffs Mine Site, BHP, 0432 641 526</p>
+                    <p><strong>Cale</strong> – Owner of Mr. Sparkle window cleaning service in Perth, WA, 0477 118 880</p>
+                    <p><strong>Suzy Cooper</strong> – Lead support worker for my client in Innaloo, MyPlace, 0430 451 614</p>
+                </div>
+                <div id="contactMe" class="content">
+                    <h2>Contact Me</h2>
+                    <p>Email: baino999@gmail.com</p>
+                    <p>Phone number: 0432084825</p>
+                    <p>Location: Perth, Western Australia</p>
+                </div>
             </div>
         </main>
     </div>
-    <script src="resumeV.2.js"></script>
+    </div>
+    <!-- src="resumeV.2.js"-->
+    <script>
+        let toggleAlignItems = true;
+
+function moveHeader() {
+    var content = document.getElementById('hiddenContent');
+    content.classList.toggle('hidden');
+    var mainHeader = document.getElementById("mainHeader");
+    mainHeader.style.maxHeight = (mainHeader.style.maxHeight === '200px') ? '100vh' : '200px';
+}
+
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.content');
+    sections.forEach(section => {
+      section.style.display = 'none';
+    });
+
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+      selectedSection.style.display = 'block';
+    }
+  }
+    </script>
 </body>
 </html>
 

@@ -1,5 +1,5 @@
 #htmlTitlePage {
-    background: #0dab76;
+    background: #F5EDF0;
     font-family: 'Exo 2', sans-serif;
 }
 
@@ -14,22 +14,28 @@
     transition: max-height 3s ease;
 }
 
+#nameTitle {
+    font-size: 50px;
+}
+
 #pageTitle {
-    background-color: #816E94;
+    background-color: #424C55;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: rgb(222, 224, 204);
-    padding: 5px;
-    border: 30px solid #816E94;
+    padding: 0px 40px 35px 40px;
+    border: 30px solid #424C55;
     border-radius: 30px;
-    box-shadow: 0px 0px 50px black;
-    height: 37px;
-    white-space: nowrap;
+    box-shadow: 0px 0px 15px black;
+    max-height: 28px;
     overflow: hidden;
-    max-width: 600px;
-    transition: max-width 3s ease, color 1.5s ease;
+    max-width: 1000px;
+    transition: max-height 2s, color 1.5s ease
 }
 
 #pageTitle:hover {
-    max-width: 950px;
+    max-height: 65px;
     color: black;
 }
 
@@ -50,4 +56,58 @@
 
 .hidden {
     display: none;
+}
+#visibleContent {
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#navList {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 40px;
+    margin-right: 35px;
+    padding-bottom: 30px;
+}
+
+#navigationMenu {
+    flex-direction: column;
+    text-align: center;
+    border-right: 5px solid black;
+    border-top: 5px solid black;
+    margin-left: 0vh;
+}
+
+#navList {
+    transition: color 0.3s ease;
+}
+
+#navList a:hover {
+    cursor: pointer;
+    color:white
+}
+
+#navPortrait {
+    object-fit: cover;
+    border: 5px solid black;
+    border-radius: 40px;
+    margin: 20px 10px 20px 0px;
+}
+
+#objective,
+#previousRoles,
+#skillsAbilities,
+#references,
+#contactMe {
+    display: none;
+}
+
+#mainContent {
+    line-height: 30px;
+    padding: 20px 20px 20px 40px;
+    flex-direction: column;
+    width: 500px;
 }
