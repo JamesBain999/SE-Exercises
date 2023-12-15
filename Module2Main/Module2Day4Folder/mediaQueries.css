@@ -1,4 +1,4 @@
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
     #nameTitle {
         font-size: 40%;
     }
@@ -10,9 +10,11 @@
         padding: 0px 0px 5px 0px;
     }
     #visibleContent {
+        flex-direction: column;
         flex-wrap: wrap;
     }
     #mainContent {
+        padding: 0 20px;
         text-align: center;
         font-size: 70%;
         width: auto;
@@ -28,5 +30,16 @@
     .content {
         opacity: 1;
         transition: none;
+    }
+    #navList {
+        border-top: 5px solid black;
+        margin: 0;
+        padding-top: 45px;
+        padding-right: 40px;
+    }
+    #saList {
+        list-style-type: none;
+        text-align: center;
+        padding-right: 40px;
     }
 }

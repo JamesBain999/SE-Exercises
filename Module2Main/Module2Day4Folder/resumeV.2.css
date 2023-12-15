@@ -92,19 +92,19 @@
     margin: 20px 10px 20px 0px;
 }
 
+#mainContent {
+    line-height: 30px;
+    padding: 20px 20px 20px 40px;
+    flex-direction: column;
+    width: 500px;
+}
+
 #objective,
 #previousRoles,
 #skillsAbilities,
 #references,
 #contactMe {
     display: none;
-}
-
-#mainContent {
-    line-height: 30px;
-    padding: 20px 20px 20px 40px;
-    flex-direction: column;
-    width: 500px;
 }
 
 .content {
