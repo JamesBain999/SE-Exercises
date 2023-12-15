@@ -5,6 +5,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,900&family=Kalnia:wght@500&family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="resumeV.2.css"/>
+    <link rel="stylesheet" href="mediaQueries.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>James Bain</title>
@@ -33,7 +34,7 @@
             <div id="mainContent">
                 <div id="aboutMe" class="content">
                     <h2>About me</h2>
-                    <p>I am James Bain, I was born in Western Australia and grew up in the Wheatbelt in a small town near Toodyay. I moved to Perth to attend secondary school at Guildford Grammar School. It was there that I developed a love for the sciences including human biology, chemistry, and physics. Since leaving school I have pursued many careers, none of which I wholeheartedly grew attached to. I have worked in the mines for a couple of years, worked in the concreting business for a year, washed windows for a semester, and picked produce for Coles over a summer. In these professions, I would often work as part of a small team but would frequently take the initiative to organize the working environment suitably for myself and my team members. I am also comfortable working independently and pride myself in always being extremely safety conscious. However, I now have majorly shifted career paths and settled on support work. I have thoroughly enjoyed my time working in this area and it has given me a great appreciation for helping others.</p>
+                    <p>I am James Bain, I was born in Western Australia and grew up in the Wheatbelt in a small town near Toodyay. I moved to Perth to attend secondary school at Guildford Grammar School. It was there that I developed a love for the sciences including human biology, chemistry, and physics. Since leaving school I have pursued many careers, none of which I wholeheartedly grew attached to. I have worked in the mines for a couple of years, worked in the concreting business for a year, washed windows for a semester, and picked produce for Coles over a summer. In these professions, I would often work as part of a small team but would frequently take the initiative to organize the working environment suitably for myself and my team members. I am also comfortable working independently and pride myself in always being extremely safety conscious. However, I now have majorly shifted career paths and settled on support work. I have thoroughly enjoyed my time working in this area and it has given me a great appreciation for helping others.</p>
                 </div>
                 <div id="objective" class="content">
                     <h2>Objective</h2>
@@ -83,29 +84,8 @@
         </main>
     </div>
     </div>
-    <!-- src="resumeV.2.js"-->
-    <script>
-        let toggleAlignItems = true;
-
-function moveHeader() {
-    var content = document.getElementById('hiddenContent');
-    content.classList.toggle('hidden');
-    var mainHeader = document.getElementById("mainHeader");
-    mainHeader.style.maxHeight = (mainHeader.style.maxHeight === '200px') ? '100vh' : '200px';
-}
-
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.content');
-    sections.forEach(section => {
-      section.style.display = 'none';
-    });
-
-    const selectedSection = document.getElementById(sectionId);
-    if (selectedSection) {
-      selectedSection.style.display = 'block';
-    }
-  }
-    </script>
+    
+    <script src="resumeV.2.js"></script>
 </body>
 </html>
 

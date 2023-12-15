@@ -60,8 +60,6 @@
 #visibleContent {
     display: flex;
     justify-content: center;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
 }
 
 #navList {
@@ -71,6 +69,12 @@
     line-height: 40px;
     margin-right: 35px;
     padding-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+#navList a:hover {
+    cursor: pointer;
+    color:white
 }
 
 #navigationMenu {
@@ -79,15 +83,6 @@
     border-right: 5px solid black;
     border-top: 5px solid black;
     margin-left: 0vh;
-}
-
-#navList {
-    transition: color 0.3s ease;
-}
-
-#navList a:hover {
-    cursor: pointer;
-    color:white
 }
 
 #navPortrait {
@@ -110,4 +105,9 @@
     padding: 20px 20px 20px 40px;
     flex-direction: column;
     width: 500px;
+}
+
+.content {
+    opacity: 0;
+    transition: opacity 3s ease;
 }

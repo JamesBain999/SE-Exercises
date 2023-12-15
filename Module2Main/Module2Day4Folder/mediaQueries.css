@@ -1,0 +1,32 @@
+@media screen and (max-width: 500px) {
+    #nameTitle {
+        font-size: 40%;
+    }
+    #headerButton {
+        font-size: 40%;
+
+    }
+    #pageTitle {
+        padding: 0px 0px 5px 0px;
+    }
+    #visibleContent {
+        flex-wrap: wrap;
+    }
+    #mainContent {
+        text-align: center;
+        font-size: 70%;
+        width: auto;
+    }
+    #navPortrait {
+        width: auto;
+        margin: 20px 0
+    }
+    #navigationMenu {
+        border-right: none;
+        border-bottom: 5px solid black;
+    }
+    .content {
+        opacity: 1;
+        transition: none;
+    }
+}

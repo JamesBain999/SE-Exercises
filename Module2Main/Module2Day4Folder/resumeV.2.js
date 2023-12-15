@@ -8,9 +8,11 @@ function moveHeader() {
 }
 
 function showSection(sectionId) {
+    var mainContent = document.getElementById(sectionId);
+    mainContent.style.opacity = (mainContent.style.opacity === '1') ? '1' : '1';
     const sections = document.querySelectorAll('.content');
     sections.forEach(section => {
-      section.style.display = 'none';
+    section.style.display = 'none';
     });
 
     const selectedSection = document.getElementById(sectionId);
