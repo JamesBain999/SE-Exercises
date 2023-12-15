@@ -1,5 +1,5 @@
 #htmlTitlePage {
-    background: #F5EDF0;
+    background: #695E4F;
     font-family: 'Exo 2', sans-serif;
 }
 
@@ -19,24 +19,28 @@
 }
 
 #pageTitle {
-    background-color: #424C55;
+    background-color: #8C6057;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: rgb(222, 224, 204);
-    padding: 0px 40px 35px 40px;
-    border: 30px solid #424C55;
-    border-radius: 30px;
-    box-shadow: 0px 0px 15px black;
+    color: black;
+    padding: 20px 65px 55px 65px;
+    border: 5px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
     max-height: 28px;
     overflow: hidden;
     max-width: 1000px;
     transition: max-height 2s, color 1.5s ease
 }
 
-#pageTitle:hover {
+#pageTitle:hover  {
     max-height: 65px;
-    color: black;
+    color: white;
+}
+
+#pageTitle:hover #headerButton  {
+    color: white;
 }
 
 #headerButton {
@@ -46,12 +50,8 @@
     margin: 0;
     font: inherit;
     cursor: pointer;
-    color: inherit;
+    color: #8C6057;
     transition: color 1.5s ease;
-}
-
-#headerButton:hover {
-    color: white 
 }
 
 .hidden {
@@ -60,14 +60,17 @@
 #visibleContent {
     display: flex;
     justify-content: center;
+    
 }
 
 #navList {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    line-height: 40px;
-    margin-right: 35px;
+    font-size: xx-large;
+    line-height: 50px;
+    margin: 20px 0px 0px 0px;
+    padding-left: 0;
     padding-bottom: 30px;
     transition: color 0.3s ease;
 }
@@ -78,10 +81,12 @@
 }
 
 #navigationMenu {
+    box-shadow: 0px 0px 5px black;
+    border-radius: 5px;
+    background: #968773;
     flex-direction: column;
     text-align: center;
-    border-right: 5px solid black;
-    border-top: 5px solid black;
+    border: 5px solid black;
     margin-left: 0vh;
 }
 
@@ -89,11 +94,16 @@
     object-fit: cover;
     border: 5px solid black;
     border-radius: 40px;
-    margin: 20px 10px 20px 0px;
+    margin: 20px 20px 0px 20px;
 }
 
 #mainContent {
+    box-shadow: 0px 0px 5px black;
+    border-radius: 5px;
+    background: #A69F98;
+    border: 5px solid black;
     line-height: 30px;
+    margin-left: 50px;
     padding: 20px 20px 20px 40px;
     flex-direction: column;
     width: 500px;
@@ -110,4 +120,14 @@
 .content {
     opacity: 0;
     transition: opacity 3s ease;
+}
+
+.contentHeading {
+    text-decoration: underline;
+    font-size: xx-large;
+    transition: color 0.3s ease;
+}
+
+#mainContent:hover .contentHeading {
+    color: white;
 }

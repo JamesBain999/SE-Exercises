@@ -1,19 +1,24 @@
 @media screen and (max-width: 800px) {
     #nameTitle {
-        font-size: 40%;
+        font-size: 80%;
+    }
+    #pageTitle:hover  {
+        max-height: 200px;
+        color: black;
     }
     #headerButton {
-        font-size: 40%;
-
+        font-size: 80%;
     }
     #pageTitle {
-        padding: 0px 0px 5px 0px;
+        text-align: center;
+        padding: 5px;
     }
     #visibleContent {
         flex-direction: column;
         flex-wrap: wrap;
     }
     #mainContent {
+        margin: 10px 0;
         padding: 0 20px;
         text-align: center;
         font-size: 70%;
@@ -24,7 +29,7 @@
         margin: 20px 0
     }
     #navigationMenu {
-        border-right: none;
+        text-align: center;
         border-bottom: 5px solid black;
     }
     .content {
@@ -34,12 +39,15 @@
     #navList {
         border-top: 5px solid black;
         margin: 0;
-        padding-top: 45px;
-        padding-right: 40px;
+        font-size: x-large;
+        padding: 10px 0px 0px 0px
     }
     #saList {
         list-style-type: none;
         text-align: center;
-        padding-right: 40px;
+        padding: 0
+    }
+    .contentHeading {
+        font-size: large;
     }
 }
