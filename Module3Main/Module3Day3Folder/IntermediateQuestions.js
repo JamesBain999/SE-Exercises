@@ -32,34 +32,75 @@
 //d) Write a function replaceMiddleAnimal(newValue) that replaces the value in the middle of the animals array with newValue
 //e) Write a function findMatchingAnimals(beginsWith) that returns a new array containing all the animals that begin with the beginsWith string. Try to make it work regardless of upper/lower case.
 
-const animals = ['Tiger', 'Giraffe']
-console.log(animals);
+// const animals = ['Tiger', 'Giraffe']
+// console.log(animals);
 
-animals.push('Rhino', 'Emu');
-console.log(animals);
+// animals.push('Rhino', 'Emu');
+// console.log(animals);
 
-animals.unshift('Elephant', 'Lion');
-console.log(animals);
+// animals.unshift('Elephant', 'Lion');
+// console.log(animals);
 
-animals.sort()
-console.log(animals);
+// animals.sort()
+// console.log(animals);
 
-function replaceMiddleAnimal(newValue){
-    let x = (animals.length)/2 
-    animals.splice(x, 1, newValue)
-    return console.log(animals)
+// function replaceMiddleAnimal(newValue){
+//     let x = (animals.length)/2 
+//     animals.splice(x, 1, newValue)
+//     return console.log(animals)
+// }
+// replaceMiddleAnimal("Camel")
+
+
+// function findMatchingAnimals(beginsWith){
+//     var animalMatch = animals.filter(word => {
+//         return word[0].toLowerCase() === beginsWith.toLowerCase()
+//     })
+//     return console.log(animalMatch)
+//     }
+
+// findMatchingAnimals("e")
+
+
+//4. Write a function camelCase(cssProp) that changes dash-separated CSS properties like 'margin-left' into camel-cased 'marginLeft'. The function should remove all dashes, and uppercase the first letter of each word after a dash.
+//b) Create variants of the camelCase function that use different types of for loops, and
+//c) with and without the conditional operator.
+
+// function camelCase(cssProp){
+//     let result = cssProp.split("-").map( x => { 
+//         x = x.split("");
+//         let y = x.shift().toUpperCase();
+//         x.unshift(y); 
+//         return x.join("");
+//         });
+//     return result.join("")
+// }
+
+// console.log(camelCase('margin-left')) // marginLeft
+// console.log(camelCase('background-image')) // backgroundImage
+// console.log(camelCase('display')) // display
+
+//5. . Decimal number operations in JavaScript can lead to unexpected results, as in the following:
+
+//b) Create a function currencyAddition(float1, float2) which safely adds the two decimal numbers float1 and float2 and returns the correct float result.
+//c) Create a function currencyOperation(float1, float2, operation) which safely performs the given operation (either +, -, / or *) on the two numbers and returns the correct float result. https://developer.mozilla.org/enUS/docs/Web/JavaScript/Reference/Statements/switch may be useful.
+//d) (Extension) Extend the above function to include a fourth argument numDecimals which allows the operation to support different amounts of decimal places from 1 to 10.
+
+let twentyCents = 0.20
+let tenCents = 0.10
+console.log(`${twentyCents} + ${tenCents} = ${twentyCents + tenCents}`)
+
+let fixedTwenty = twentyCents.toFixed(2);
+let fixedTen = tenCents.toFixed(2);
+console.log(fixedTwenty + fixedTen)
+
+// a) The computer struggles to hold certain values
+
+function currencyAddition(float1, float2){
+    return console.log((float1 + float2).toFixed(1))
 }
-replaceMiddleAnimal("Camel")
 
+currencyAddition(twentyCents, tenCents)
 
-function findMatchingAnimals(beginsWith){
-    //beginsWith = beginsWith.toLowerCase();
-    animals.map( x => {
-        x = x.split("")
-        if (x[0] === beginsWith){
-            return console.log(x.join(""))
-        }
-    })
+function currencyOperation(float1, float2, operation){
 }
-
-findMatchingAnimals("E")
