@@ -193,37 +193,37 @@
 //d) Rewrite the constructor function as a class called PersonClass and use it to create a third person using different name and age values. Print it to the console as well.
 //e) Add a canDrive method to both the constructor function and the class that returns true if the person is old enough to drive. 
 
-// function Person(name, age) {
-//     this.name = name;
-//     this.age = age;
-//     this.human = true;
-//     this.cantDrive = () => (this.age > 16) ? console.log("Can drive") : console.log("Cannot drive")
-//    }
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.human = true;
+    this.cantDrive = () => (this.age > 16) ? console.log("Can drive") : console.log("Cannot drive")
+   }
 
-// class PersonClass{
-//     constructor(name, age){
-//         this.name = name;
-//         this.age = age;
-//         this.human = true;
-//     }
-//     canDrive(){
-//         if (this.age > 16){
-//             return console.log("Can drive")
-//         } else {
-//             return console.log("Cannot drive")
-//         }
-//     }
-// }
+class PersonClass{
+    constructor(name, age){
+        this.name = name;
+        this.age = age;
+        this.human = true;
+    }
+    canDrive(){
+        if (this.age > 16){
+            return console.log("Can drive")
+        } else {
+            return console.log("Cannot drive")
+        }
+    }
+}
 
-//    let bilbo = new Person('Bilbo', 203)
-//    let frodo = new Person('Frodo', 14)
-//    let legolas = new PersonClass('Legolas', 145)
+   let bilbo = new Person('Bilbo', 203)
+   let frodo = new Person('Frodo', 14)
+   let legolas = new PersonClass('Legolas', 145)
 
-//     bilbo.cantDrive()
-//     frodo.cantDrive()
-//     legolas.canDrive()
+    bilbo.cantDrive()
+    frodo.cantDrive()
+    legolas.canDrive()
 
 
-//    console.log(bilbo)
-//    console.log(frodo)
-//    console.log(legolas)
+   console.log(bilbo)
+   console.log(frodo)
+   console.log(legolas)
