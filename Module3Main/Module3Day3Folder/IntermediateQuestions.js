@@ -276,26 +276,16 @@
 //c) Calculate and print your age as: 'I am x years, y months and z days old'
 //d) Write a function daysInBetween(date1, date2) which calculates and returns the amount of days in between the two given dates.
 
-const today = new Date();
-console.log('Current time is ' + today.toLocaleTimeString())
-console.log(today.getHours() + ' hours have passed so far today')
+// const today = new Date();
+// console.log('Current time is ' + today.toLocaleTimeString())
+// console.log(today.getHours() + ' hours have passed so far today')
 
-let totalMinutes = ((today.getHours()-1) * 60) + today.getMinutes()
+// let totalMinutes = ((today.getHours()-1) * 60) + today.getMinutes()
 
-console.log(totalMinutes + ' minutes have passed so far today')
+// console.log(totalMinutes + ' minutes have passed so far today')
 
-let totalSeconds = ((totalMinutes-1) * 60) + today.getSeconds()
+// let totalSeconds = ((totalMinutes-1) * 60) + today.getSeconds()
 
-console.log(totalSeconds + ' seconds have passed so far today')
+// console.log(totalSeconds + ' seconds have passed so far today')
 
-const birthday = new Date(2000, 09, 18)
-
-let todayMilli = today.totalMinutes()
-let birthdayMilli = birthday.totalMinutes()
-
-console.log(todayMilli)
-console.log(birthdayMilli)
-
-const oldMan = todayMilli - birthdayMilli
-
-console.log(oldMan)
+// const birthday = new Date(2000, 09, 18)
