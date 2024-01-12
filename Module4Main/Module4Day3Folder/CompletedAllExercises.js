@@ -2,19 +2,19 @@ class Product {
     #stockCount
     #isOnSale = false;
 
-    constructor(name, price, description, stockCount) {
-      this._name = name;
+    constructor(id, price, description, stockCount) {
+      this._id = id;
       this._price = price;
       this._description = description;
       this.#stockCount = stockCount
     }
   
-    get name() {
-      return this._name;
+    get id() {
+      return this._id;
     }
   
-    set name(value) {
-      this._name = value;
+    set id(value) {
+      this._id = value;
     }
   
     get price() {
@@ -45,7 +45,7 @@ class Product {
       }
 
     static compareTwo(item1, item2){
-        console.log(`${item1.name}: $${item1.price}\n${item2.name}: $${item2.price}`)
+        console.log(`${item1.id}: $${item1.price}\n${item2.id}: $${item2.price}`)
     }
     static Compare(product1, product2) {
         return product1.price - product2.price;
@@ -70,8 +70,8 @@ class Product {
   }
 
 class TV extends Product {
-    constructor(name, price, description, screenSize) {
-      super(name, price, description);
+    constructor(id, price, description, screenSize) {
+      super(id, price, description);
       this._screenSize = screenSize;
     }
   
@@ -91,8 +91,8 @@ class TV extends Product {
   }
   
 class Shirt extends Product {
-    constructor(name, price, description, size) {
-      super(name, price, description);
+    constructor(id, price, description, size) {
+      super(id, price, description);
       this._size = size;
     }
   
@@ -156,7 +156,7 @@ class Cart {
       displayItems() {
         return this.items.map((element) => {
           const product = element.product;
-          return console.log(`Name: ${product.name}; Price: $${product.price}, Quantity: ${element.quantity}`);
+          return console.log(`id: ${product.id}; Price: $${product.price}`);
         });
       }
     
@@ -211,6 +211,7 @@ class Cart {
         }, 0);
       }
 
+      //Exercise 9
       async fetchAndAddProducts(apiUrl) {
         try {
           const response = await fetch(apiUrl);
@@ -222,14 +223,77 @@ class Cart {
     
           // Assuming the API returns an array of product objects
           products.forEach((productData) => {
-            const { name, price, description, stockCount } = productData;
-            const product = new Product(name, price, description, stockCount);
-            this.addProduct(product, 1); // Assuming a default quantity of 1
+            const { id, price, description, stockCount } = productData;
+            const product = new Product(id, price, description, stockCount);
+            this.addProduct(product, 1);
           });
-    
-          console.log('Products fetched and added to the cart:', products);
+          console.log('Products fetched and added to the cart:', products.forEach((element) => console.log(element)));
         } catch (error) {
           console.error('Error fetching or adding products:', error.message);
+        }
+      }
+
+      //Exercise 10
+      // fetchAndAddProducts(apiUrl) {
+      //   fetch(apiUrl)
+      //     .then((response) => {
+      //       if (!response.ok) {
+      //         throw new Error(`Failed to fetch product data. Status: ${response.status}`);
+      //       }
+      //       return response.json();
+      //     })
+      //     .then((products) => {
+      //       products.forEach((productData) => {
+      //         const { id, price, description, stockCount } = productData;
+      //         const product = new Product(id, price, description, stockCount);
+      //         this.addProduct(product, 1); // Assuming a default quantity of 1
+      //       });
+    
+      //       console.log('Products fetched and added to the cart:', products.forEach((element) => console.log(element)));
+      //     })
+      //     .catch((error) => {
+      //       console.error('Error fetching or adding products:', error.message);
+      //     });
+      //   }
+
+      async checkout() {
+        try {
+          // Apply discount codes
+          await this.applyDiscountCode("DISCOUNT10");
+          await this.applyDiscountCode("DISCOUNT15");
+    
+          // Display items before sorting and discounts
+          console.log("Items in the cart before sorting and discounts:");
+
+          this.displayItems();
+
+          console.log("Cart total (before sorting and discounts): $" + this.calculateTotal());
+    
+          // Sort the products in the cart
+          this.sortProducts();
+    
+          // Display items after sorting
+          console.log("\nItems in the cart after sorting:");
+          this.displayItems();
+          console.log("Cart total (after sorting): $" + this.calculateTotal());
+    
+          // Apply a discount code
+          await this.applyDiscountCode("DISCOUNT15");
+    
+          // Display items after applying a discount code
+          console.log("\nItems in the cart after applying a 15% discount:");
+          this.displayItems();
+          console.log("Cart total (after 15% discount): $" + this.calculateTotal());
+    
+          // Simulate a process like placing an order or completing the checkout
+          console.log("\nSimulating the checkout process...");
+    
+          // Display the final items in the cart and the total
+          console.log("\nFinal items in the cart:");
+          this.displayItems();
+          console.log("Final cart total: $" + this.calculateTotal());
+        } catch (error) {
+          console.error('Error during checkout:', error.message);
         }
       }
     }
@@ -307,11 +371,11 @@ class Cart {
 
 //TESTING FOR EXERCISE 8
 
-const tv1 = new TV("Smart TV", 1000, "4K UHD TV", 55);
-const tv2 = new TV("LED TV", 800, "Full HD TV", 42);
-const tshirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
+// const tv1 = new TV("Smart TV", 1000, "4K UHD TV", 55);
+// const tv2 = new TV("LED TV", 800, "Full HD TV", 42);
+// const tshirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
 
-const cart = new Cart();
+
 
 // cart.addItem(tv1, 2);
 // cart.addItem(tv2, 1);
@@ -345,6 +409,18 @@ const cart = new Cart();
 // cart.displayItems()
 // console.log("Cart total (after sorting again): $" + cart.calculateTotal());
 
-//TESTING FOR EXERCISE 9
+//TESTING FOR EXERCISE 9 or 10
 
-// cart.fetchAndAddProducts("https://fakestoreapi.com/");
+// const cart = new Cart();
+
+// cart.fetchAndAddProducts("https://fakestoreapi.com/products");
+
+//TESTING FOR EXERCISE 11
+
+// Example usage within an asynchronous function
+
+const cart = new Cart();
+cart.fetchAndAddProducts('https://fakestoreapi.com/products');
+cart.checkout();
+
+
