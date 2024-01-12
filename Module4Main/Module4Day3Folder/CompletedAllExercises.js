@@ -210,7 +210,29 @@ class Cart {
           return total + itemTotal;
         }, 0);
       }
-  }
+
+      async fetchAndAddProducts(apiUrl) {
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch product data. Status: ${response.status}`);
+          }
+    
+          const products = await response.json();
+    
+          // Assuming the API returns an array of product objects
+          products.forEach((productData) => {
+            const { name, price, description, stockCount } = productData;
+            const product = new Product(name, price, description, stockCount);
+            this.addProduct(product, 1); // Assuming a default quantity of 1
+          });
+    
+          console.log('Products fetched and added to the cart:', products);
+        } catch (error) {
+          console.error('Error fetching or adding products:', error.message);
+        }
+      }
+    }
 
 //TESTING FOR EXERCISE 1
 
@@ -291,34 +313,38 @@ const tshirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
 
 const cart = new Cart();
 
-cart.addItem(tv1, 2);
-cart.addItem(tv2, 1);
-cart.addItem(tshirt, 1);
+// cart.addItem(tv1, 2);
+// cart.addItem(tv2, 1);
+// cart.addItem(tshirt, 1);
 
-cart.displayItems()
-console.log("Cart total (before sorting and discounts): $" + cart.calculateTotal());
+// cart.displayItems()
+// console.log("Cart total (before sorting and discounts): $" + cart.calculateTotal());
 
-cart.sortProducts();
-cart.displayItems()
-console.log("Cart total (after sorting): $" + cart.calculateTotal());
+// cart.sortProducts();
+// cart.displayItems()
+// console.log("Cart total (after sorting): $" + cart.calculateTotal());
 
-cart.applyDiscountCode("DISCOUNT15");
-cart.displayItems()
-console.log("Cart total (after 15% discount): $" + cart.calculateTotal());
+// cart.applyDiscountCode("DISCOUNT15");
+// cart.displayItems()
+// console.log("Cart total (after 15% discount): $" + cart.calculateTotal());
 
-const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 15);
-const book2 = new Book("Harry Potter", "J.K. Rowling", 25);
+// const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 15);
+// const book2 = new Book("Harry Potter", "J.K. Rowling", 25);
 
-//cart.addItem(book1, 2); CANNOT GET TO WORK
-//cart.addItem(book2, 2); CANNOT GET TO WORK
+// //cart.addItem(book1, 2); CANNOT GET TO WORK
+// //cart.addItem(book2, 2); CANNOT GET TO WORK
 
-cart.displayItems()
-console.log("Cart total (after adding books): $" + cart.calculateTotal());
+// cart.displayItems()
+// console.log("Cart total (after adding books): $" + cart.calculateTotal());
 
-cart.removeItem(tv1);
-cart.displayItems()
-console.log("Cart total (after removing 2 TVs): $" + cart.calculateTotal());
+// cart.removeItem(tv1);
+// cart.displayItems()
+// console.log("Cart total (after removing 2 TVs): $" + cart.calculateTotal());
 
-cart.sortProducts();
-cart.displayItems()
-console.log("Cart total (after sorting again): $" + cart.calculateTotal());
+// cart.sortProducts();
+// cart.displayItems()
+// console.log("Cart total (after sorting again): $" + cart.calculateTotal());
+
+//TESTING FOR EXERCISE 9
+
+// cart.fetchAndAddProducts("https://fakestoreapi.com/");
