@@ -212,26 +212,29 @@ class Cart {
       }
 
       //Exercise 9
-      async fetchAndAddProducts(apiUrl) {
+      async fetchAndAddProducts(apiUrl, callback) {
         try {
-          const response = await fetch(apiUrl);
-          if (!response.ok) {
-            throw new Error(`Failed to fetch product data. Status: ${response.status}`);
-          }
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch product data. Status: ${response.status}`);
+            }
     
-          const products = await response.json();
+            const products = await response.json();
     
-          // Assuming the API returns an array of product objects
-          products.forEach((productData) => {
-            const { id, price, description, stockCount } = productData;
-            const product = new Product(id, price, description, stockCount);
-            this.addProduct(product, 1);
-          });
-          console.log('Products fetched and added to the cart:', products.forEach((element) => console.log(element)));
+            // Assuming the API returns an array of product objects
+            products.forEach((productData) => {
+                const { id, price, description, stockCount } = productData;
+                const product = new Product(id, price, description, stockCount);
+                this.addProduct(product, 1);
+            });
+    
+            console.log('Products fetched and added to the cart:');
+            products.forEach((element) => console.log(element.title));
+            callback(); // Call the callback function to signal that fetching is complete
         } catch (error) {
-          console.error('Error fetching or adding products:', error.message);
+            console.error('Error fetching or adding products:', error.message);
         }
-      }
+    }
 
       //Exercise 10
       // fetchAndAddProducts(apiUrl) {
@@ -259,8 +262,8 @@ class Cart {
       async checkout() {
         try {
           // Apply discount codes
-          await this.applyDiscountCode("DISCOUNT10");
-          await this.applyDiscountCode("DISCOUNT15");
+          this.applyDiscountCode("DISCOUNT10");
+          this.applyDiscountCode("DISCOUNT15");
     
           // Display items before sorting and discounts
           console.log("Items in the cart before sorting and discounts:");
@@ -278,7 +281,7 @@ class Cart {
           console.log("Cart total (after sorting): $" + this.calculateTotal());
     
           // Apply a discount code
-          await this.applyDiscountCode("DISCOUNT15");
+          this.applyDiscountCode("DISCOUNT15");
     
           // Display items after applying a discount code
           console.log("\nItems in the cart after applying a 15% discount:");
@@ -297,6 +300,46 @@ class Cart {
         }
       }
     }
+
+      async function main() {
+        try {
+          const cart = new Cart();
+      
+          // Fetch and add products to the cart
+          const apiUrl = 'https://fakestoreapi.com/products';
+          await cart.fetchAndAddProducts(apiUrl);
+      
+          // Display items in the cart before any operations
+          console.log('Items in the cart before any operations:');
+          cart.displayItems();
+          console.log('Cart total (before any operations): $' + cart.calculateTotal());
+      
+          // Apply discount codes
+          await cart.applyDiscountCode('DISCOUNT10');
+          await cart.applyDiscountCode('DISCOUNT15');
+      
+          // Display items after applying discounts
+          console.log('\nItems in the cart after applying discounts:');
+          cart.displayItems();
+          console.log('Cart total (after applying discounts): $' + cart.calculateTotal());
+      
+          // Sort products in the cart
+          cart.sortProducts();
+      
+          // Display items after sorting
+          console.log('\nItems in the cart after sorting:');
+          cart.displayItems();
+          console.log('Cart total (after sorting): $' + cart.calculateTotal());
+      
+          // Checkout process
+          await cart.checkout();
+      
+          // Additional steps or user interactions can be added here
+      
+        } catch (error) {
+          console.error('Error during the shopping process:', error.message);
+        }
+      }
 
 //TESTING FOR EXERCISE 1
 
@@ -419,8 +462,11 @@ class Cart {
 
 // Example usage within an asynchronous function
 
-const cart = new Cart();
-cart.fetchAndAddProducts('https://fakestoreapi.com/products');
-cart.checkout();
+// const cart = new Cart();
+// cart.fetchAndAddProducts('https://fakestoreapi.com/products', () => {
+//     cart.checkout();
+// });
+
+main()
 
 
