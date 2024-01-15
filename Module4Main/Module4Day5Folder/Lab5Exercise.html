@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Dynamic News</title>
+    </head>
+    <body>
+        <template id="news-template">
+            <div class="card col-8" style="width: 18rem; margin:10px">
+                <div class="card-body">
+                    <h5 class="card-title">News title</h5>
+                    <p class="card-text">News text</p>
+                </div>
+            </div>
+        </template>
+        <div id="news-list" class="row"></div>
+        <script>
+            let news = [ 
+                { id: 1, title: 'Election Results', content: "Newly elected minister..." },
+                { id: 2, title: 'Sporting Success', content: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable." },
+                { id: 3, title: 'Tornado Warning', content: "Residents should prepare..." }
+            ];
+
+            function getNews() {
+                return new Promise(resolve => {
+                    setTimeout(function(){
+                    // resolve the promise with the news content data after 5s
+                    resolve(news)
+                    }, 5000)
+                })
+            }
+
+            // get data asynchronously, then console.log for testing
+            getNews().then((news) => console.log(news))
+
+            function addCard(news) {
+                const template =
+                document.getElementById("news-template").content.cloneNode(true);
+                template.querySelector('.card-title').innerText = news.id + ". " + news.title;
+                template.querySelector('.card-text').innerText = news.content;
+                document.querySelector('#news-list').appendChild(template);
+            }
+
+            // get data asynchronously, then use it to populate a template
+
+            getNews().then( (news) => news.forEach(news => addCard(news)) )
+        </script>
+    </body> 
+</html>
