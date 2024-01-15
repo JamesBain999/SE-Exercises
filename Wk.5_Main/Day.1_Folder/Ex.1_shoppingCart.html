@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use of Session Storage</title>
+</head>
+<body>
+
+<script defer>
 class Product {
     #stockCount;
     #isOnSale = false;
@@ -67,11 +77,11 @@ class Product {
         const discountedPrice = this.price * ((100 - discountPercentage) / 100);
         this._price = discountedPrice;
     }
-    }
+}
 
 class Cart {
     constructor() {
-        this.items = [];
+        this.loadFromSessionStorage();
         this.discountCodes = [
         { code: "DISCOUNT10", discountPercentage: 10 },
         { code: "DISCOUNT15", discountPercentage: 15 },
@@ -79,9 +89,9 @@ class Cart {
     }
 
     displayItems() {
-        return this.items.map((element) => {
-        const product = element.product;
-        return console.log(`id: ${product.id}; Price: $${product.price}`);
+        this.items.map((element) => {
+            const product = element.product;
+            console.log(`id: ${product.id}; Price: $${product.price}`);
         });
     }
 
@@ -163,29 +173,6 @@ class Cart {
         }
     }
 
-  //Exercise 10
-  // fetchAndAddProducts(apiUrl) {
-  //   fetch(apiUrl)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`Failed to fetch product data. Status: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((products) => {
-  //       products.forEach((productData) => {
-  //         const { id, price, description, stockCount } = productData;
-  //         const product = new Product(id, price, description, stockCount);
-  //         this.addProduct(product, 1); // Assuming a default quantity of 1
-  //       });
-
-  //       console.log('Products fetched and added to the cart:', products.forEach((element) => console.log(element)));
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching or adding products:', error.message);
-  //     });
-  //   }
-
     async checkout() {
         try {
         // Apply discount codes
@@ -228,6 +215,37 @@ class Cart {
         console.error("Error during checkout:", error.message);
         }
     }
+
+    clearCart(){
+        this.items = [];
+        this.saveToSessionStorage();
+    }
+    
+    // New method to save the cart to sessionStorage
+    saveToSessionStorage() {
+        sessionStorage.setItem('cart', JSON.stringify(this.items));
+    }
+
+    // New method to load cart data from sessionStorage
+    loadFromSessionStorage() {
+    const storedCart = sessionStorage.getItem('cart');
+    this.items = storedCart ? JSON.parse(storedCart, (key, value) => {
+        if (key === 'product') {
+            // Reconstruct the Product instance
+            const product = new Product(
+                value._id,
+                value._price,
+                value._description,
+                value.stockCount
+            );
+            // Restore other properties if needed
+            product.isOnSale = value.isOnSale;
+            return product;
+        }
+    return value;
+    }) 
+    : [];
+}
 }
 
 class Book {
@@ -300,172 +318,58 @@ class Shirt extends Product {
     }
 }
 
-//TESTING FOR EXERCISE 1
+// Create a new instance of the Cart
+    const cart = new Cart();
 
-// const myProduct = new Product("Laptop", 1000, "High-performance laptop");
-// console.log(myProduct);
-// myProduct.price = 1200;
-// console.log(myProduct);
+    // Load cart data from sessionStorage on page load
+    window.addEventListener('load', () => {
+    cart.loadFromSessionStorage();
+    console.log("Cart loaded from sessionStorage on page load:");
+    });
 
-//TESTING FOR EXERCISE 2
+    function addItemsToCart(){
+        const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+        const product1 = new Product(getRandomInt(1, 100), getRandomInt(1, 100), "description", getRandomInt(1, 100));
 
-// const tv1 = new TV("samsung", 1200, "big tv", "40 inches")
-// const shirt1 = new TV("polo", 100, "white shirt", "large")
-// console.log(tv1)
-// console.log(shirt1)
+        cart.addProduct(product1, getRandomInt(1, 100))
 
-//TESTING FOR EXERCISE 3
 
-// Book.prototype.displayInfo = function () {
-//   console.log(`${this.title} by ${this.author}, $${this.price}`);
-// };
+        document.getElementById("addItemDisplay").textContent = `(Id: ${product1.id}) (Price: ${product1.price}) has been added to your cart`
+        let output = "";
 
-//const book1 = new Book("blah", "mah", 15)
-// book1.displayInfo()
+        for (let i = 0; i < cart.items.length; i++) {
+            const element = cart.items[i];
+            output += `Item no.${i + 1} (Id: ${element.product.id}) (Price: ${element.product.price})<br>`;
+        }
 
-//TESTING FOR EXERCISE 4
-
-// const product1 = new Product("Laptop", 1000, "High-performance laptop")
-// const product2 = new Product("Phone", 800, "Smartphone with great features")
-
-// Product.compareTwo(product1, product2);
-
-//TESTING FOR EXERCISE 5
-
-// try {
-//     const invalidProduct = new Product("Invalid", -50, "This should throw an error");
-//     console.log(invalidProduct);
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-
-//TESTING FOR EXERCISE 6
-
-// const product1 = new Product("Laptop", 1000, "High-performance laptop", 6)
-
-// console.log(product1.stockCount)
-
-// product1.updateStockCount(10)
-
-// console.log(product1.stockCount)
-
-//TESTING FOR EXERCISE 7
-
-// const tv1 = new TV("Smart TV", 1000, "4K UHD TV", 55);
-// const tv2 = new TV("LED TV", 800, "Full HD TV", 42);
-// const shirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
-
-// Create a Cart instance
-// const cart = new Cart();
-
-// Add products to the cart
-// cart.addProduct(tv1, 2);
-// cart.addProduct(shirt, 1);
-// cart.addProduct(tv2, 1);
-
-// Display the initial cart
-// console.log("Initial Cart:");
-// console.log(cart.displayItems());
-
-// Sort the products in the cart
-// cart.sortProducts();
-
-// Display the cart after sorting
-// console.log("\nCart sorted by price from low to high:");
-// console.log(cart.displayItems());
-
-//TESTING FOR EXERCISE 8
-
-// const tv1 = new TV("Smart TV", 1000, "4K UHD TV", 55);
-// const tv2 = new TV("LED TV", 800, "Full HD TV", 42);
-// const shirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
-
-// cart.addItem(tv1, 2);
-// cart.addItem(tv2, 1);
-// cart.addItem(shirt, 1);
-
-// cart.displayItems()
-// console.log("Cart total (before sorting and discounts): $" + cart.calculateTotal());
-
-// cart.sortProducts();
-// cart.displayItems()
-// console.log("Cart total (after sorting): $" + cart.calculateTotal());
-
-// cart.applyDiscountCode("DISCOUNT15");
-// cart.displayItems()
-// console.log("Cart total (after 15% discount): $" + cart.calculateTotal());
-
-// const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 15);
-// const book2 = new Book("Harry Potter", "J.K. Rowling", 25);
-
-// //cart.addItem(book1, 2); CANNOT GET TO WORK
-// //cart.addItem(book2, 2); CANNOT GET TO WORK
-
-// cart.displayItems()
-// console.log("Cart total (after adding books): $" + cart.calculateTotal());
-
-// cart.removeItem(tv1);
-// cart.displayItems()
-// console.log("Cart total (after removing 2 TVs): $" + cart.calculateTotal());
-
-// cart.sortProducts();
-// cart.displayItems()
-// console.log("Cart total (after sorting again): $" + cart.calculateTotal());
-
-//TESTING FOR EXERCISE 9 or 10
-
-// const cart = new Cart();
-
-// cart.fetchAndAddProducts("https://fakestoreapi.com/products");
-
-//TESTING FOR EXERCISE 11
-
-// Example usage within an asynchronous function
-
-// const cart = new Cart();
-// cart.fetchAndAddProducts('https://fakestoreapi.com/products', () => {
-//     cart.checkout();
-// });
-
-//TESTING FOR EXERCISE 12
-
-async function main() {
-    try {
-        const cart = new Cart();
-
-        //   Fetch and add products to the cart
-        const apiUrl = "https://fakestoreapi.com/products";
-        await cart.fetchAndAddProducts(apiUrl);
-
-        //   Display items in the cart before any operations
-        console.log("Items in the cart before any operations:");
-        cart.displayItems();
-        console.log("Cart total (before any operations): $" + cart.calculateTotal());
-
-        //   Apply discount codes
-        await cart.applyDiscountCode("DISCOUNT10");
-        await cart.applyDiscountCode("DISCOUNT15");
-
-        //   Display items after applying discounts
-        console.log("\nItems in the cart after applying discounts:");
-        cart.displayItems();
-        console.log(  "Cart total (after applying discounts): $" + cart.calculateTotal());
-
-        //   Sort products in the cart
-        cart.sortProducts();
-
-        //   Display items after sorting
-        console.log("\nItems in the cart after sorting:");
-        cart.displayItems();
-        console.log("Cart total (after sorting): $" + cart.calculateTotal());
-
-        // Checkout process
-        await cart.checkout();
-
-        //Additional steps or user interactions can be added here
-        } catch (error) {
-        console.error("Error during the shopping process:", error.message);
+        document.getElementById("displayOutput").innerHTML = output;
+        cart.saveToSessionStorage();
     }
-}
 
-main();
+    function displayCart() {
+        let output = "";
+
+        for (let i = 0; i < cart.items.length; i++) {
+            const element = cart.items[i];
+            output += `Item no.${i + 1} (Id: ${element.product.id}) (Price: ${element.product.price})<br>`;
+        }
+
+        document.getElementById("displayOutput").innerHTML = output;
+    }
+
+    function clearTheCart(){
+        cart.clearCart()
+        document.getElementById("addItemDisplay").textContent = `All items have been removed from your cart`
+        document.getElementById("displayOutput").textContent = `No items in your Cart`
+    }
+</script>
+
+<button onclick="addItemsToCart()">Add a random item to the cart</button>
+<button onclick="clearTheCart()">Clear your cart</button>
+<button onclick="displayCart()">Display your Cart</button>
+<p id="addItemDisplay">...</p>
+<p>ITEMS IN YOUR CART:</p>
+<p id="displayOutput"></p>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use of Local Storage</title>
+</head>
+<body>
+
+<script defer>
+class Product {
+    #stockCount;
+    #isOnSale = false;
+
+    constructor(id, price, description, stockCount) {
+        this._id = id;
+        this._price = price;
+        this._description = description;
+        this.#stockCount = stockCount;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    set id(value) {
+        this._id = value;
+    }
+
+    get price() {
+        return this._price;
+    }
+
+    set price(value) {
+        if (value < 0) {
+            throw new Error("Price cannot be negative");
+        }
+        this._price = value;
+    }
+
+    get description() {
+        return this._description;
+    }
+
+    set description(value) {
+        this._description = value;
+    }
+
+    get stockCount() {
+        return this.#stockCount;
+    }
+
+    updateStockCount(newStockCount) {
+        this.#stockCount = newStockCount;
+    }
+
+    static compareTwo(item1, item2) {
+        console.log(`${item1.id}: $${item1.price}\n${item2.id}: $${item2.price}`);
+    }
+
+    static Compare(product1, product2) {
+        return product1.price - product2.price;
+    }
+
+    get isOnSale() {
+        return this.#isOnSale;
+    }
+
+    set isOnSale(value) {
+        this.#isOnSale = value;
+    }
+
+    getSalePrice() {
+        return this.#isOnSale ? this.constructor.salePrice : this.price;
+    }
+
+    applyDiscount(discountPercentage) {
+        const discountedPrice = this.price * ((100 - discountPercentage) / 100);
+        this._price = discountedPrice;
+    }
+}
+
+class Cart {
+    constructor() {
+        this.loadFromLocalStorage(); // Load cart data from localStorage on initialization
+        this.discountCodes = [
+            { code: "DISCOUNT10", discountPercentage: 10 },
+            { code: "DISCOUNT15", discountPercentage: 15 },
+        ];
+    }
+
+    displayItems() {
+        this.items.map((element) => {
+            const product = element.product;
+            console.log(`id: ${product.id}; Price: $${product.price}`);
+        });
+    }
+
+    addProduct(product, quantity) {
+        if (!(product instanceof Product)) {
+            throw new Error("Only instances of Product can be added to the cart");
+        }
+
+        if (quantity <= 0) {
+            throw new Error("Quantity must be greater than 0");
+        }
+
+        this.items.push({ product, quantity });
+        this.saveToLocalStorage(); // Save changes to localStorage
+    }
+
+    sortProducts() {
+        this.items.sort((a, b) => Product.Compare(a.product, b.product));
+        this.saveToLocalStorage(); // Save changes to localStorage
+    }
+
+    removeItem(product) {
+        this.items = this.items.filter((item) => item.product !== product);
+        this.saveToLocalStorage(); // Save changes to localStorage
+    }
+
+    updateQuantity(product, newQuantity) {
+        const item = this.items.find((item) => item.product === product);
+
+        if (item) {
+            item.quantity = newQuantity;
+        }
+
+        this.saveToLocalStorage(); // Save changes to localStorage
+    }
+
+    applyDiscountCode(code) {
+        const discountCode = this.discountCodes.find((dc) => dc.code === code);
+
+        if (discountCode) {
+            discountCode.isApplied = true;
+            const discountPercentage = discountCode.discountPercentage;
+            this.items.forEach((item) => {
+                item.product.applyDiscount(discountPercentage);
+            });
+
+            this.saveToLocalStorage(); // Save changes to localStorage
+        }
+    }
+
+    calculateTotal() {
+        return this.items.reduce((total, item) => {
+            const itemTotal = item.product.getSalePrice() * item.quantity;
+            return total + itemTotal;
+        }, 0);
+    }
+
+    async fetchAndAddProducts(apiUrl, callback) {
+        try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(
+            `Failed to fetch product data. Status: ${response.status}`
+            );
+        }
+
+        const products = await response.json();
+
+        // Assuming the API returns an array of product objects
+        products.forEach((productData) => {
+            const { id, price, description, stockCount } = productData;
+            const product = new Product(id, price, description, stockCount);
+            this.addProduct(product, 1);
+        });
+
+        console.log("Products fetched and added to the cart:");
+        products.forEach((element) => console.log(element.title));
+        callback(); // Call the callback function to signal that fetching is complete
+        } catch (error) {
+        console.error("Error fetching or adding products:", error.message);
+        }
+    }
+
+    async checkout() {
+        try {
+        // Apply discount codes
+        this.applyDiscountCode("DISCOUNT10");
+        this.applyDiscountCode("DISCOUNT15");
+
+        // Display items before sorting and discounts
+        console.log("Items in the cart before sorting and discounts:");
+
+        this.displayItems();
+
+        console.log(
+            "Cart total (before sorting and discounts): $" + this.calculateTotal()
+        );
+
+        // Sort the products in the cart
+        this.sortProducts();
+
+        // Display items after sorting
+        console.log("\nItems in the cart after sorting:");
+        this.displayItems();
+        console.log("Cart total (after sorting): $" + this.calculateTotal());
+
+        // Apply a discount code
+        this.applyDiscountCode("DISCOUNT15");
+
+        // Display items after applying a discount code
+        console.log("\nItems in the cart after applying a 15% discount:");
+        this.displayItems();
+        console.log("Cart total (after 15% discount): $" + this.calculateTotal());
+
+        // Simulate a process like placing an order or completing the checkout
+        console.log("\nSimulating the checkout process...");
+
+        // Display the final items in the cart and the total
+        console.log("\nFinal items in the cart:");
+        this.displayItems();
+        console.log("Final cart total: $" + this.calculateTotal());
+        } catch (error) {
+        console.error("Error during checkout:", error.message);
+        }
+    }
+
+    clearCart() {
+        this.items = [];
+        this.saveToLocalStorage(); // Save changes to localStorage
+    }
+
+    // New method to save the cart to localStorage
+    saveToLocalStorage() {
+        localStorage.setItem('cart', JSON.stringify(this.items));
+    }
+
+    // New method to load cart data from localStorage
+    loadFromLocalStorage() {
+        const storedCart = localStorage.getItem('cart');
+        this.items = storedCart ? JSON.parse(storedCart, (key, value) => {
+            if (key === 'product') {
+                // Reconstruct the Product instance
+                const product = new Product(
+                    value._id,
+                    value._price,
+                    value._description,
+                    value.stockCount
+                );
+                // Restore other properties if needed
+                product.isOnSale = value.isOnSale;
+                return product;
+            }
+            return value;
+        }) 
+        : [];
+    }
+}
+
+class Book {
+    #title;
+    #author;
+    #price;
+
+    constructor(title, author, price) {
+        this.#title = title;
+        this.#author = author;
+        this.#price = price;
+    }
+
+    get title() {
+        return this.#title;
+    }
+
+    get author() {
+        return this.#author;
+    }
+
+    get price() {
+        return this.#price;
+    }
+
+    displayInfo() {
+        console.log(`${this.#title} by ${this.#author}, $${this.#price}`);
+    }
+}
+
+class Shirt extends Product {
+    constructor(id, price, description, size) {
+        super(id, price, description);
+        this._size = size;
+    }
+
+    get size() {
+        return this._size;
+    }
+
+    set size(value) {
+        this._size = value;
+    }
+
+    static #salePrice = 20;
+
+    static get salePrice() {
+        return this.#salePrice;
+    }
+}
+
+class TV extends Product {
+    constructor(id, price, description, screenSize) {
+        super(id, price, description);
+        this._screenSize = screenSize;
+    }
+
+    get screenSize() {
+        return this._screenSize;
+    }
+
+    set screenSize(value) {
+        this._screenSize = value;
+    }
+
+    static #salePrice = 800;
+
+    static get salePrice() {
+        return this.#salePrice;
+    }
+}
+
+// Create a new instance of the Cart
+const cart = new Cart();
+
+// Load cart data from localStorage on page load
+window.addEventListener('load', () => {
+    cart.loadFromLocalStorage();
+    console.log("Cart loaded from localStorage on page load:");
+});
+
+function addItemsToCart(){
+    const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const product1 = new Product(getRandomInt(1, 100), getRandomInt(1, 100), "description", getRandomInt(1, 100));
+
+    cart.addProduct(product1, getRandomInt(1, 100))
+
+
+    document.getElementById("addItemDisplay").textContent = `(Id: ${product1.id}) (Price: ${product1.price}) has been added to your cart`
+    let output = "";
+
+    for (let i = 0; i < cart.items.length; i++) {
+        const element = cart.items[i];
+        output += `Item no.${i + 1} (Id: ${element.product.id}) (Price: ${element.product.price})<br>`;
+    }
+
+    document.getElementById("displayOutput").innerHTML = output;
+    cart.saveToLocalStorage();
+}
+
+function displayCart() {
+        let output = "";
+
+        for (let i = 0; i < cart.items.length; i++) {
+            const element = cart.items[i];
+            output += `Item no.${i + 1} (Id: ${element.product.id}) (Price: ${element.product.price})<br>`;
+        }
+
+        document.getElementById("displayOutput").innerHTML = output;
+    }
+
+    function clearTheCart(){
+        cart.clearCart()
+        document.getElementById("addItemDisplay").textContent = `All items have been removed from your cart`
+        document.getElementById("displayOutput").textContent = `No items in your Cart`
+    }
+</script>
+
+<button onclick="addItemsToCart()">Add a random item to the cart</button>
+<button onclick="clearTheCart()">Clear your cart</button>
+<button onclick="displayCart()">Display your Cart</button>
+<p id="addItemDisplay">...</p>
+<p>ITEMS IN YOUR CART:</p>
+<p id="displayOutput"></p>
+
+</body>
+</html>
