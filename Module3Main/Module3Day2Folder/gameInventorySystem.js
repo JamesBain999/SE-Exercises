@@ -70,8 +70,8 @@ class Character{
     }
     //Total value of all items in inventory
     totalValue(){
-        let clone = this.inventory.reduce((total, item) => total + item.ItemValue, 0)
-        console.log(`The total value of all your items is ${clone} gold`)
+        let totalItem = this.inventory.reduce((total, item) => total + item.ItemValue, 0)
+        console.log(`The total value of all your items is ${totalItem} gold`)
     }
     //Show inventory
     showInventory() {

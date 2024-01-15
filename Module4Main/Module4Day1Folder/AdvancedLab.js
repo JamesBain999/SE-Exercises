@@ -7,7 +7,7 @@
 //     console.log( a * b );
 //     }
 
-// Function.prototype.delayed = function (delay) {
+// Function.prototype.delay = function (delay) {
 //     return (...args) => setTimeout(() => this(...args), delay);
 //     };
 
@@ -19,34 +19,34 @@
 //c) Create a new constructor function Student that uses call to inherit from Person and add an extra property cohort
 //d) Add a custom toString for Student objects that formats and prints their details. Test with 2 students.
 
-// function Person(name, age, gender) {
-//     this.name = name;
-//     this.age = age;
-//     this.gender = gender;
-//     this.toString = function (){
-//         return console.log(`My name is ${this.name}, I am ${this.age} years old and I am a ${this.gender}`)
-//     }
-// }
+function Person(name, age, gender) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.toString = function (){
+        return `My name is ${this.name}, I am ${this.age} years old and I am a ${this.gender}`
+    }
+}
 
-// function Student(name, age, gender, cohort) {
-//     Person.call(this, name, age, gender);
-//     this.cohort = cohort
-//     this.toString = function (){
-//         return console.log(`My name is ${this.name}, I am ${this.age} years old and I am a ${this.gender}. I am in the ${this.cohort} cohort`)
-//     }
-// }
+function Student(name, age, gender, cohort) {
+    Person.call(this, name, age, gender);
+    this.cohort = cohort
+    this.toString = function (){
+        return `My name is ${this.name}, I am ${this.age} years old and I am a ${this.gender}. I am in the ${this.cohort} cohort`
+    }
+}
 
-// const person1 = new Person('James Brown', 73, 'male')
-// const person2 = new Person('John Jones', 33, 'male')
-// const person3 = new Person('Jacob Adams', 14, 'female')
-// const person4 = new Student('Greg Jones', 22, 'male', 'hairy')
-// const person5 = new Student('Gary Adams', 44, 'female', 'hairy')
+const person1 = new Person('James Brown', 73, 'male')
+const person2 = new Person('John Jones', 33, 'male')
+const person3 = new Person('Jacob Adams', 14, 'female')
+const person4 = new Student('Greg Jones', 22, 'male', 'hairy')
+const person5 = new Student('Gary Adams', 44, 'female', 'hairy')
 
-// person1.toString()
-// person2.toString()
-// person3.toString()
-// person4.toString()
-// person5.toString()
+console.log("person 1: " + person1)
+console.log("person 2: " + person2)
+console.log("person 3: " + person3)
+console.log("person 4: " + person4)
+console.log("person 5: " + person5)
 
 //8. The following DigitalClock class uses an interval to print the time every second once started, until stopped.
 //a) Create a new class PrecisionClock that inherits from DigitalClock and adds the parameter precision – the number of ms between 'ticks'. This precision parameter should default to 1 second if not supplied.
