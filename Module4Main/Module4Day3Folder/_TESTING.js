@@ -1,4 +1,4 @@
-class Product {
+export class Product {
     #stockCount
     #isOnSale = false;
 
@@ -69,82 +69,7 @@ class Product {
       }
   }
 
-class TV extends Product {
-    constructor(id, price, description, screenSize) {
-      super(id, price, description);
-      this._screenSize = screenSize;
-    }
-  
-    get screenSize() {
-      return this._screenSize;
-    }
-  
-    set screenSize(value) {
-      this._screenSize = value;
-    }
-
-    static #salePrice = 800;
-
-    static get salePrice() {
-        return this.#salePrice;
-  }
-  }
-  
-class Shirt extends Product {
-    constructor(id, price, description, size) {
-      super(id, price, description);
-      this._size = size;
-    }
-  
-    get size() {
-      return this._size;
-    }
-  
-    set size(value) {
-      this._size = value;
-    }
-
-    static #salePrice = 20;
-
-    static get salePrice() {
-        return this.#salePrice;
-  }
-  }
-
-  class Book {
-    #title;
-    #author;
-    #price;
-  
-    constructor(title, author, price) {
-      this.#title = title;
-      this.#author = author;
-      this.#price = price;
-    }
-  
-    get title() {
-      return this.#title;
-    }
-  
-    get author() {
-      return this.#author;
-    }
-  
-    get price() {
-      return this.#price;
-    }
-  
-    displayInfo() {
-      console.log(`${this.#title} by ${this.#author}, $${this.#price}`);
-    }
-  }
-  
-  
-  Book.prototype.displayInfo = function () {
-    console.log(`${this.title} by ${this.author}, $${this.price}`);
-  };
-
-class Cart {
+  export class Cart {
     constructor() {
         this.items = [];
         this.discountCodes = [
@@ -236,6 +161,7 @@ class Cart {
         }
     }
 
+
       //Exercise 10
       // fetchAndAddProducts(apiUrl) {
       //   fetch(apiUrl)
@@ -301,53 +227,82 @@ class Cart {
       }
     }
 
-      async function main() {
-        try {
-          const cart = new Cart();
-      
-          // Fetch and add products to the cart
-          const apiUrl = 'https://fakestoreapi.com/products';
-          await cart.fetchAndAddProducts(apiUrl);
-      
-          // Display items in the cart before any operations
-          console.log('Items in the cart before any operations:');
-          cart.displayItems();
-          console.log('Cart total (before any operations): $' + cart.calculateTotal());
-      
-          // Apply discount codes
-          await cart.applyDiscountCode('DISCOUNT10');
-          await cart.applyDiscountCode('DISCOUNT15');
-      
-          // Display items after applying discounts
-          console.log('\nItems in the cart after applying discounts:');
-          cart.displayItems();
-          console.log('Cart total (after applying discounts): $' + cart.calculateTotal());
-      
-          // Sort products in the cart
-          cart.sortProducts();
-      
-          // Display items after sorting
-          console.log('\nItems in the cart after sorting:');
-          cart.displayItems();
-          console.log('Cart total (after sorting): $' + cart.calculateTotal());
-      
-          // Checkout process
-          await cart.checkout();
-      
-          // Additional steps or user interactions can be added here
-      
-        } catch (error) {
-          console.error('Error during the shopping process:', error.message);
+    export class Book {
+        #title;
+        #author;
+        #price;
+    
+        constructor(title, author, price) {
+            this.#title = title;
+            this.#author = author;
+            this.#price = price;
         }
+    
+        get title() {
+            return this.#title;
+        }
+    
+        get author() {
+            return this.#author;
+        }
+    
+        get price() {
+            return this.#price;
+        }
+    
+        displayInfo() {
+            console.log(`${this.#title} by ${this.#author}, $${this.#price}`);
+        }
+    }
+      
+    export class Shirt extends Product {
+        constructor(id, price, description, size) {
+          super(id, price, description);
+          this._size = size;
+        }
+      
+        get size() {
+          return this._size;
+        }
+      
+        set size(value) {
+          this._size = value;
+        }
+    
+        static #salePrice = 20;
+    
+        static get salePrice() {
+            return this.#salePrice;
       }
+    }
+    
+    export class TV extends Product {
+        constructor(id, price, description, screenSize) {
+          super(id, price, description);
+          this._screenSize = screenSize;
+        }
+      
+        get screenSize() {
+          return this._screenSize;
+        }
+      
+        set screenSize(value) {
+          this._screenSize = value;
+        }
+    
+        static #salePrice = 800;
+    
+        static get salePrice() {
+            return this.#salePrice;
+      }
+    }
 
 //TESTING FOR EXERCISE 1
 
-//   const myProduct = new Product("Laptop", 1000, "High-performance laptop");
-//   console.log(myProduct); 
-//   myProduct.price = 1200;
-//   console.log(myProduct);
-
+const myProduct = new Product("Laptop", 1000, "High-performance laptop");
+console.log(myProduct); 
+myProduct.price = 1200;
+console.log(myProduct);
 
 //TESTING FOR EXERCISE 2
 
@@ -357,6 +312,10 @@ class Cart {
 // console.log(shirt1)
 
 //TESTING FOR EXERCISE 3
+        
+// Book.prototype.displayInfo = function () {
+//   console.log(`${this.title} by ${this.author}, $${this.price}`);
+// };
 
 //const book1 = new Book("blah", "mah", 15)
 // book1.displayInfo()
@@ -391,14 +350,14 @@ class Cart {
 
 // const tv1 = new TV("Smart TV", 1000, "4K UHD TV", 55);
 // const tv2 = new TV("LED TV", 800, "Full HD TV", 42);
-// const tshirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
+// const shirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
 
 // // Create a Cart instance
 // const cart = new Cart();
 
 // // Add products to the cart
 // cart.addProduct(tv1, 2);
-// cart.addProduct(tshirt, 1);
+// cart.addProduct(shirt, 1);
 // cart.addProduct(tv2, 1);
 
 // // Display the initial cart
@@ -416,13 +375,13 @@ class Cart {
 
 // const tv1 = new TV("Smart TV", 1000, "4K UHD TV", 55);
 // const tv2 = new TV("LED TV", 800, "Full HD TV", 42);
-// const tshirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
+// const shirt = new Shirt("Cotton T-shirt", 20, "Casual wear", "M");
 
 
 
 // cart.addItem(tv1, 2);
 // cart.addItem(tv2, 1);
-// cart.addItem(tshirt, 1);
+// cart.addItem(shirt, 1);
 
 // cart.displayItems()
 // console.log("Cart total (before sorting and discounts): $" + cart.calculateTotal());
@@ -467,6 +426,49 @@ class Cart {
 //     cart.checkout();
 // });
 
-main()
+//TESTING FOR EXERCISE 12
+
+
+// async function main() {
+//   try {
+//     const cart = new Cart();
+
+//     // Fetch and add products to the cart
+//     const apiUrl = 'https://fakestoreapi.com/products';
+//     await cart.fetchAndAddProducts(apiUrl);
+
+//     // Display items in the cart before any operations
+//     console.log('Items in the cart before any operations:');
+//     cart.displayItems();
+//     console.log('Cart total (before any operations): $' + cart.calculateTotal());
+
+//     // Apply discount codes
+//     await cart.applyDiscountCode('DISCOUNT10');
+//     await cart.applyDiscountCode('DISCOUNT15');
+
+//     // Display items after applying discounts
+//     console.log('\nItems in the cart after applying discounts:');
+//     cart.displayItems();
+//     console.log('Cart total (after applying discounts): $' + cart.calculateTotal());
+
+//     // Sort products in the cart
+//     cart.sortProducts();
+
+//     // Display items after sorting
+//     console.log('\nItems in the cart after sorting:');
+//     cart.displayItems();
+//     console.log('Cart total (after sorting): $' + cart.calculateTotal());
+
+//     // Checkout process
+//     await cart.checkout();
+
+//     // Additional steps or user interactions can be added here
+
+//   } catch (error) {
+//     console.error('Error during the shopping process:', error.message);
+//   }
+// }
+
+//main()
 
 
