@@ -276,16 +276,37 @@
 //c) Calculate and print your age as: 'I am x years, y months and z days old'
 //d) Write a function daysInBetween(date1, date2) which calculates and returns the amount of days in between the two given dates.
 
-// const today = new Date();
-// console.log('Current time is ' + today.toLocaleTimeString())
-// console.log(today.getHours() + ' hours have passed so far today')
+const today = new Date();
 
-// let totalMinutes = ((today.getHours()-1) * 60) + today.getMinutes()
+// a) Print the total number of minutes that have passed so far today
+console.log('Current time is ' + today.toLocaleTimeString());
+console.log(today.getHours() + ' hours have passed so far today');
 
-// console.log(totalMinutes + ' minutes have passed so far today')
+let totalMinutes = (today.getHours() * 60) + today.getMinutes();
+console.log(totalMinutes + ' minutes have passed so far today');
 
-// let totalSeconds = ((totalMinutes-1) * 60) + today.getSeconds()
+// b) Print the total number of seconds that have passed so far today
+let totalSeconds = (totalMinutes * 60) + today.getSeconds();
+console.log(totalSeconds + ' seconds have passed so far today');
 
-// console.log(totalSeconds + ' seconds have passed so far today')
+// c) Calculate and print your age as: 'I am x years, y months and z days old'
+const birthday = new Date(2000, 8, 18);
+const ageMilliseconds = today - birthday;
+const ageDate = new Date(ageMilliseconds);
 
-// const birthday = new Date(2000, 09, 18)
+const years = ageDate.getUTCFullYear() - 1970;
+const months = ageDate.getUTCMonth();
+const days = ageDate.getUTCDate() - 1;
+
+console.log(`I am ${years} years, ${months} months, and ${days} days old`);
+
+// d) Write a function daysInBetween(date1, date2) which calculates and returns the amount of days in between the two given dates.
+function daysInBetween(date1, date2) {
+  const millisecondsInDay = 24 * 60 * 60 * 1000;
+  const difference = Math.abs(date1 - date2);
+  return Math.floor(difference / millisecondsInDay);
+}
+
+// Example usage of the function
+const daysBetween = daysInBetween(today, birthday);
+console.log(`Days between today and birthday: ${daysBetween}`);
