@@ -1,0 +1,64 @@
+<html lang="en">
+
+<head>
+    <title>Calculator Example</title>
+</head>
+
+<body>
+    <input id="num1" type="number" placeholder="Enter a number...">
+    <input id="num2" type="number" placeholder="Enter a number...">
+    <button type="submit" onclick="addFunction()">Add</button>
+    <button type="submit" onclick="subtractFunction()">Subtract</button>
+    <button type="submit" onclick="divideFunction()">Divide</button>
+    <button type="submit" onclick="multiplyFunction()">Multiply</button>
+    <div>
+        <p>Result: <span id="result">0</span></p>
+    </div>
+</body>
+<script>
+    //Add two numbers
+    function addFunction(){
+        let num1 = document.getElementById('num1').value;
+        let num2 = document.getElementById('num2').value;
+        fetch(`/calculator/add?num1=${num1}&num2=${num2}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `${num1} + ${num2} = ${data.result}`;
+        })
+    }
+
+    //Subtract two numbers
+    function subtractFunction(){
+        let num1 = document.getElementById('num1').value;
+        let num2 = document.getElementById('num2').value;
+        fetch(`/calculator/subtract?num1=${num1}&num2=${num2}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `${num1} - ${num2} = ${data.result}`;
+        })
+    }
+
+    //Divide two numbers
+    function divideFunction(){
+        let num1 = document.getElementById('num1').value;
+        let num2 = document.getElementById('num2').value;
+        fetch(`/calculator/divide?num1=${num1}&num2=${num2}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `${num1} / ${num2} = ${data.result}`;
+        })
+    }
+
+    //Multiply two numbers
+    function multiplyFunction(){
+        let num1 = document.getElementById('num1').value;
+        let num2 = document.getElementById('num2').value;
+        fetch(`/calculator/multiply?num1=${num1}&num2=${num2}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `${num1} * ${num2} = ${data.result}`;
+        })
+    }
+</script>
+
+</html>

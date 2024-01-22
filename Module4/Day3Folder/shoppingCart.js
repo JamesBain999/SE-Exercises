@@ -413,9 +413,13 @@ class TV extends Product {
 
 //TESTING FOR EXERCISE 9 or 10
 
-// const cart = new Cart();
+// const cart1 = new Cart();
 
-// cart.fetchAndAddProducts("https://fakestoreapi.com/products");
+// cart1.fetchAndAddProducts("https://fakestoreapi.com/products");
+
+const cart2 = new Cart();
+
+cart2.fetchAndAddProducts("https://fakestoreapi.com/products3476457");
 
 //TESTING FOR EXERCISE 11
 
