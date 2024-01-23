@@ -1,0 +1,85 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My Ecommerce Project",
+        "description": "My User Project Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3002",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Fake Ecommerce Website",
+            "description": "API for Calculus in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/Ecommerce.html": {
+            "get": {
+                "summary": "Get an example resource",
+                "description": "This endpoint retrieves an example resource.",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 1,
+                                    "name": "Example Item"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/another-example": {
+            "post": {
+                "summary": "Create a new example resource",
+                "description": "This endpoint creates a new example resource.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Example resource object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Example"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Resource created successfully"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Example": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
